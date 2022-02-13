@@ -9,7 +9,6 @@ import {
   CustomStatusCellViewComponent,
   DashboardComponent
 } from '../../pages/dashboard/dashboard.component';
-import {IconsComponent} from '../../pages/icons/icons.component';
 import {NgxTabsModule} from '@ngx-tiny/tabs';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -27,7 +26,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     DashboardComponent,
-    IconsComponent,
     CustomStatusCellViewComponent
   ]
 })

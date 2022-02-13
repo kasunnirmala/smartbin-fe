@@ -4,12 +4,12 @@ import {AngularTreeGridComponent} from 'angular-tree-grid';
 import {Level2ServiceService} from '../../services/level2-service.service';
 import {Level3ServiceService} from '../../services/level3-service.service';
 import {lastValueFrom} from 'rxjs';
-import {DeviceServiceService} from "../../services/device-service.service";
-import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AddLevel1DialogComponent} from "./add-level1-dialog/add-level1-dialog.component";
-import {AddLevel2DialogComponent} from "./add-level2-dialog/add-level2-dialog.component";
-import {AddLevel3DialogComponent} from "./add-level3-dialog/add-level3-dialog.component";
-import {AddDeviceDialogComponent} from "./add-device-dialog/add-device-dialog.component";
+import {DeviceServiceService} from '../../services/device-service.service';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AddLevel1DialogComponent} from './add-level1-dialog/add-level1-dialog.component';
+import {AddLevel2DialogComponent} from './add-level2-dialog/add-level2-dialog.component';
+import {AddLevel3DialogComponent} from './add-level3-dialog/add-level3-dialog.component';
+import {AddDeviceDialogComponent} from './add-device-dialog/add-device-dialog.component';
 
 @Component({
   selector: 'app-dashboard',

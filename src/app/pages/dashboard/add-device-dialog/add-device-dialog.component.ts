@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Level2} from "../../../models/level2";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Level3ServiceService} from "../../../services/level3-service.service";
-import {Level2ServiceService} from "../../../services/level2-service.service";
-import {ToastrService} from "ngx-toastr";
-import {Level3} from "../../../models/level3";
-import {DeviceServiceService} from "../../../services/device-service.service";
-import {Device} from "../../../models/device";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Level2} from '../../../models/level2';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Level3ServiceService} from '../../../services/level3-service.service';
+import {Level2ServiceService} from '../../../services/level2-service.service';
+import {ToastrService} from 'ngx-toastr';
+import {Level3} from '../../../models/level3';
+import {DeviceServiceService} from '../../../services/device-service.service';
+import {Device} from '../../../models/device';
 
 @Component({
   selector: 'app-add-device-dialog',
