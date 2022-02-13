@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">ADD DEVICE</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="device">
+    <div class="form-group">
+      <label for="binId">Bin Id</label>
+      <input style="color: black" type="text" class="form-control" id="binId" placeholder="BIN ID"
+             formControlName="binId">
+      <label *ngIf="device.get('binId').invalid" [ngClass]="'error'"> Bin Id is required. </label>
+    </div>
+
+    <div class="form-group">
+
+      <label for="level3">Level3</label>
+      <select style="color: black" class="custom-select mr-sm-2" id="level3" formControlName="level3Id">
+        <option *ngFor="let lvl3 of level3s" [value]="lvl3.id">{{lvl3.code}}</option>
+
+      </select>
+      <label *ngIf="device.get('level3Id').invalid" [ngClass]="'error'"> Level3 is required. </label>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onAdd()">ADD</button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

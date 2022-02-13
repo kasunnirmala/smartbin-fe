@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title">ADD LEVEL 3</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="level3">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input style="color: black" type="text" class="form-control" id="name" placeholder="Level3 Name"
+             formControlName="name">
+      <label *ngIf="level3.get('name').invalid" [ngClass]="'error'"> Name is required. </label>
+    </div>
+    <div class="form-group">
+      <label for="code">Code</label>
+      <input style="color: black" type="text" class="form-control" id="code" placeholder="Level3 Code"
+             formControlName="code">
+      <label *ngIf="level3.get('code').invalid" [ngClass]="'error'"> Code is required. </label>
+    </div>
+    <div class="form-group">
+
+      <label for="level2">Level2</label>
+      <select style="color: black" class="custom-select mr-sm-2" id="level2" formControlName="level2Id">
+        <option *ngFor="let lvl2 of level2s" [value]="lvl2.id">{{lvl2.code}}</option>
+
+      </select>
+      <label *ngIf="level3.get('level2Id').invalid" [ngClass]="'error'"> Level2 is required. </label>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onAdd()">ADD</button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
