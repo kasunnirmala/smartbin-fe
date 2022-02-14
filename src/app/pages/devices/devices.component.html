@@ -6,7 +6,11 @@
           <h5 class=" title">DEVICES</h5>
         </div>
         <div class=" card-body">
-          <div class="raw"></div>
+          <div class="raw">
+            <div class="col-md-2 col-sm-6 col-xs-12 col-6" *ngFor="let bin of devices" #bins>
+              <div class="ldBar label-center bin-style" [id]="bin.binId"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
