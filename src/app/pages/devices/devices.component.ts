@@ -2,6 +2,9 @@ import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angula
 import ldBar from '@loadingio/loading-bar';
 import {Device} from '../../models/device';
 import {DeviceServiceService} from '../../services/device-service.service';
+import {AddLevel3DialogComponent} from "../dashboard/add-level3-dialog/add-level3-dialog.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {DeviceDataComponent} from "./device-data/device-data.component";
 
 @Component({
   selector: 'app-devices',
@@ -13,7 +16,7 @@ export class DevicesComponent implements OnInit, AfterViewInit {
   devices: Device[] = [];
   @ViewChildren('bins') binsQueue: QueryList<any>;
 
-  constructor(private deviceService: DeviceServiceService) {
+  constructor(private deviceService: DeviceServiceService, private modalService: NgbModal) {
   }
 
   ngAfterViewInit(): void {
@@ -46,12 +49,15 @@ export class DevicesComponent implements OnInit, AfterViewInit {
         value: val
       });
     })
+  }
 
-    // const bar1 = new ldBar('#myItem1', {
-    //   value: 50,
-    //   type: 'fill',
-    //   fill: 'red',
-    //   path: 'M 16 64 L 56 64 C 65 44 65 19 56 0 L 15 0 C 7 18 7 44 16 64',
-    // });
+  openDeviceData(device: Device) {
+    const modalRef = this.modalService.open(DeviceDataComponent);
+    modalRef.componentInstance.device = device;
+    modalRef.result.then((result) => {
+
+      },
+      (reason) => {
+      });
   }
 }

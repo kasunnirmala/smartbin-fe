@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{device.binId}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-5">Bin Id</div>
+    <div class="col-7">: {{device.binId}}</div>
+  </div>
+  <div class="row">
+    <div class="col-5">Last Value</div>
+    <div class="col-7">: {{device.lastUpdatedValue}}</div>
+  </div>
+  <div class="row">
+    <div class="col-5">Last Updated Date</div>
+    <div class="col-7">: {{device.updatedAt|date:'short'}}</div>
+  </div>
+  <div class="row">
+    <div class="col-5">Level 1</div>
+    <div class="col-7">: {{levelHierarchy.level1}}</div>
+  </div>
+  <div class="row">
+    <div class="col-5">Level 2</div>
+    <div class="col-7">: {{levelHierarchy.level2}}</div>
+  </div>
+  <div class="row">
+    <div class="col-5">Level 3</div>
+    <div class="col-7">: {{levelHierarchy.level3}}</div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">Bin data history</div>
+    <div class="col-12">
+      <img [src]="chartURL" alt="" style="height: 40vh; width: auto;">
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
