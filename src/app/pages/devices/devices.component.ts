@@ -42,6 +42,7 @@ export class DevicesComponent implements OnInit, AfterViewInit {
     this.devices.forEach(bin => {
       let val = ((bin.lastUpdatedValue ?? 0) / 2);
       val = val > 100 ? 100 : val;
+      val = Math.round(val * 100) / 100
       new ldBar(`#${bin.binId}`, {
         type: 'fill',
         fill: val > 60 ? 'red' : val > 30 ? 'orange' : 'green',

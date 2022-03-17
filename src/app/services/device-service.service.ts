@@ -21,6 +21,15 @@ export class DeviceServiceService {
   }
 
   createDevice(data: Device): Observable<Device> {
+    console.log(data)
     return this.http.post<Device>(`${environment.BASE_URL}/device`, data);
+  }
+
+  deleteDevice(id: number): Observable<Device> {
+    return this.http.delete<Device>(`${environment.BASE_URL}/device/${id}`);
+  }
+
+  updateDevice(data: Device): Observable<Device> {
+    return this.http.post<Device>(`${environment.BASE_URL}/device/edit/`, data);
   }
 }

@@ -45,7 +45,7 @@ export class AddLevel3DialogComponent implements OnInit {
       }
       this.level3Service.createLevel3(lvl3).subscribe(value => {
         if (value) {
-          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 2 Added Successfully', '', {
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 3 Added Successfully', '', {
             closeButton: true,
             enableHtml: true,
             toastClass: 'alert alert-success alert-with-icon',

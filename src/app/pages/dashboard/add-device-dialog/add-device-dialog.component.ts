@@ -43,7 +43,7 @@ export class AddDeviceDialogComponent implements OnInit {
       }
       this.deviceService.createDevice(dev).subscribe(value => {
         if (value) {
-          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 2 Added Successfully', '', {
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Device Added Successfully', '', {
             closeButton: true,
             enableHtml: true,
             toastClass: 'alert alert-success alert-with-icon',

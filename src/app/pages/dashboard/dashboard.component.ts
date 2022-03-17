@@ -4,6 +4,7 @@ import {AngularTreeGridComponent} from 'angular-tree-grid';
 import {Level2ServiceService} from '../../services/level2-service.service';
 import {Level3ServiceService} from '../../services/level3-service.service';
 import {lastValueFrom} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 import {DeviceServiceService} from '../../services/device-service.service';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddLevel1DialogComponent} from './add-level1-dialog/add-level1-dialog.component';
@@ -25,35 +26,56 @@ export class DashboardComponent implements OnInit {
     parent_id_field: 'parent',
     parent_display_field: 'code',
     filter: true,
+    actions: {
+      add: true,
+      edit: true,
+      delete: true,
+      resolve_add: true,
+      resolve_delete: true,
+      resolve_edit: true
+    },
     columns: [
       {
         name: 'code',
         header: 'CODE',
         width: '20%',
+        editable: true
       },
       {
         name: 'name',
         header: 'LEVEL NAME',
-        width: '30%'
+        width: '27%',
+        editable: true
       },
       {
         name: 'binId',
         header: 'BIN ID',
-        width: '50%'
+        width: '30%',
+        editable: true
       },
       {
         name: 'status',
         header: 'STATUS',
         type: 'custom',
         component: CustomStatusCellViewComponent,
-        width: '50%'
+        width: '15%'
       },
       // {
       //   name: 'createdAt',
       //   header: 'CREATED AT',
       //   width: '100%'
       // },
-    ]
+    ],
+    css: {
+                
+      //expand_icon: '<i class="fa fa-caret-right"> </i>',
+      //collapse_icon: '<i class="fa fa-caret-down"> </i>',
+      //add_icon: '<i class="fa fa-plus"> </i>',
+      //edit_icon: '<i class="fa fa-plus"> </i>',
+      //delete_icon: '<i class="fa fa-trash"> </i>',
+      //save_icon: '<i class="fa fa-save"> </i>',
+      //cancel_icon: '<i class="fa fa-remove"> </i>',
+    }
   };
 
   @ViewChild('angularGrid') angularGrid: AngularTreeGridComponent;
@@ -63,8 +85,138 @@ export class DashboardComponent implements OnInit {
     private level2Service: Level2ServiceService,
     private level3Service: Level3ServiceService,
     private deviceService: DeviceServiceService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {
+  }
+
+  onRowSave($e) {
+    if($e.data.parent.split('-')[0] == 'level3'){
+      //console.log($e.data)
+      this.deviceService.updateDevice($e.data).subscribe(value => {
+        if(value){
+          this.getData().then(r => console.log(r));
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Device Edited Successfully', '', {
+            closeButton: true,
+            enableHtml: true,
+            toastClass: 'alert alert-success alert-with-icon',
+            positionClass: 'toast-top-right'
+          });
+        }
+      });
+    }
+    else if($e.data.parent.split('-')[0] == 'level2'){
+      //console.log($e.data)
+      this.level3Service.updateLevel3($e.data).subscribe(value => {
+        if(value){
+          this.getData().then(r => console.log(r));
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 3 Edited Successfully', '', {
+            closeButton: true,
+            enableHtml: true,
+            toastClass: 'alert alert-success alert-with-icon',
+            positionClass: 'toast-top-right'
+          });
+        }
+      });
+    }
+    else if($e.data.parent.split('-')[0] == 'level1'){
+      //console.log($e.data)
+      this.level2Service.updateLevel2($e.data).subscribe(value => {
+        if(value){
+          this.getData().then(r => console.log(r));
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 2 Edited Successfully', '', {
+            closeButton: true,
+            enableHtml: true,
+            toastClass: 'alert alert-success alert-with-icon',
+            positionClass: 'toast-top-right'
+          });
+        }
+      });
+    }
+    else if($e.data.parent == '0'){
+      //console.log($e.data)
+      this.level1Service.updateLevel1($e.data).subscribe(value => {
+        if(value){
+          this.getData().then(r => console.log(r));
+          this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 1 Edited Successfully', '', {
+            closeButton: true,
+            enableHtml: true,
+            toastClass: 'alert alert-success alert-with-icon',
+            positionClass: 'toast-top-right'
+          });
+        }
+      });
+    }
+    const data = $e.data;
+    setTimeout(() => {
+      $e.resolve();
+    }, 500);
+  }
+
+  onRowDelete($e) {
+    //console.log($e.data)
+    if(confirm("Are you sure to delete " + $e.data.code)){
+      if($e.data.parent.split('-')[0] == 'level3'){
+        const idList = $e.data.id.split('-')
+        this.deviceService.deleteDevice(idList[idList.length-1]).subscribe(value => {
+          if(value){
+            this.getData().then(r => console.log(r));
+            this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Device Deleted', '', {
+              closeButton: true,
+              enableHtml: true,
+              toastClass: 'alert alert-warning alert-with-icon',
+              positionClass: 'toast-top-right'
+            });
+          }
+        });
+      }
+      else if($e.data.parent.split('-')[0] == 'level2'){
+        //console.log("in Level 3")
+        const idList = $e.data.id.split('-')
+        this.level3Service.deleteLevel3(idList[idList.length-1]).subscribe(value => {
+          if(value){
+            this.getData().then(r => console.log(r));
+            this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 3 Deleted', '', {
+              closeButton: true,
+              enableHtml: true,
+              toastClass: 'alert alert-warning alert-with-icon',
+              positionClass: 'toast-top-right'
+            });
+          }
+        });
+      }
+      else if($e.data.parent.split('-')[0] == 'level1'){
+        //console.log("in level 2")
+        const idList = $e.data.id.split('-')
+        this.level2Service.deleteLevel2(idList[idList.length-1]).subscribe(value => {
+          if(value){
+            this.getData().then(r => console.log(r));
+            this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 2 Deleted', '', {
+              closeButton: true,
+              enableHtml: true,
+              toastClass: 'alert alert-warning alert-with-icon',
+              positionClass: 'toast-top-right'
+            });
+          }
+        });
+      }
+      else if($e.data.parent == '0'){
+        //console.log("in Level 1")
+        const idList = $e.data.id.split('-')
+        this.level1Service.deleteLevel1(idList[idList.length-1]).subscribe(value => {
+          if(value){
+            this.getData().then(r => console.log(r));
+            this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Level 1 Deleted', '', {
+              closeButton: true,
+              enableHtml: true,
+              toastClass: 'alert alert-warning alert-with-icon',
+              positionClass: 'toast-top-right'
+            });
+          }
+        });
+      }
+      const data = $e.data;
+      $e.resolve();}
   }
 
   openAddLevel1Dialog() {

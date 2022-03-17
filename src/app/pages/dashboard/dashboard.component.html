@@ -98,7 +98,7 @@
               <!--                  Tab 3-->
               <!--                </ngx-tab>-->
               <!--              </ngx-tabs>-->
-              <db-angular-tree-grid style="color: green" [data]="data" [configs]="configs"></db-angular-tree-grid>
+              <db-angular-tree-grid style="color: green" [data]="data"  [configs]="configs" (rowsave)="onRowSave($event)" (rowdelete)="onRowDelete($event)" ></db-angular-tree-grid>
 
             </div>
           </div>

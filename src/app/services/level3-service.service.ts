@@ -23,4 +23,12 @@ export class Level3ServiceService {
   createLevel3(data: Level3): Observable<Level3> {
     return this.http.post<Level3>(`${environment.BASE_URL}/level3`, data);
   }
+
+  deleteLevel3(id: number): Observable<Level3> {
+    return this.http.delete<Level3>(`${environment.BASE_URL}/level3/${id}`);
+  }
+
+  updateLevel3(data: Level3): Observable<Level3> {
+    return this.http.post<Level3>(`${environment.BASE_URL}/level3/edit/`, data);
+  }
 }
